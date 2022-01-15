@@ -27,6 +27,8 @@ Flix is an app that allows users to browse movies from the [The Movie Database A
 
 <img src='Flixer landscape preview.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
+<img src='flixer part 2 preview.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
 ### Notes
 For almost 2 hours I didn't realize that the emulator had auto-rotate turned off by deafault, so I kept trying to make changes to the way I was approaching landscape configurations. I think that would be a good thing to mention in the project specs so no one else does that.
 
