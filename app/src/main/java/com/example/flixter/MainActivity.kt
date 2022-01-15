@@ -25,6 +25,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        actionBar?.hide()
+
         rvMovies = findViewById<RecyclerView>(R.id.rvMovies)
 
         val movieAdapter = MovieAdapter(this, movies)

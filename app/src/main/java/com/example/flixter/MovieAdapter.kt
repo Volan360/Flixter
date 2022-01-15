@@ -1,5 +1,7 @@
 package com.example.flixter
 
+import android.app.Activity
+import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
@@ -14,6 +16,15 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import androidx.core.app.ActivityOptionsCompat
+import android.util.Pair
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.CenterInside
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import com.bumptech.glide.request.RequestOptions
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation
+
 
 const val MOVIE_EXTRA = "MOVIE_EXTRA"
 class MovieAdapter(private val context: Context, private val movies: MutableList<Movie>):
@@ -36,6 +47,7 @@ class MovieAdapter(private val context: Context, private val movies: MutableList
             AnimationUtils.loadAnimation(holder.itemView.context, R.anim.anim_1)
 
 
+
     }
 
     override fun getItemCount() = movies.size
@@ -54,10 +66,14 @@ class MovieAdapter(private val context: Context, private val movies: MutableList
             tvTitle.text = movie.title
             tvOverview.text = movie.overview
             if(Resources.getSystem().configuration.orientation == Configuration.ORIENTATION_PORTRAIT){
-                Glide.with(context).load(movie.posterImageUrl).into(ivPoster)
+                Glide.with(context).load(movie.posterImageUrl)
+                    .transform(CenterInside(), RoundedCorners(30))
+                    .into(ivPoster)
                 }
             if(Resources.getSystem().configuration.orientation == Configuration.ORIENTATION_LANDSCAPE){
-                Glide.with(context).load(movie.backdropImageUrl).into(ivPoster)
+                Glide.with(context).load(movie.backdropImageUrl)
+                    .transform(CenterInside(), RoundedCorners(30))
+                    .into(ivPoster)
             }
         }
 
@@ -66,9 +82,15 @@ class MovieAdapter(private val context: Context, private val movies: MutableList
             val movie = movies[adapterPosition]
             // 2. Use the intent system to open the new activity
             val intent = Intent(context, DetailActivity::class.java)
-            intent.putExtra(MOVIE_EXTRA, movie)
+            val putExtra = intent.putExtra(MOVIE_EXTRA, movie)
+
+            val p1 = Pair.create<View?, String?>(tvTitle, "title")
+            val p2 = Pair.create<View?, String?>(tvOverview, "overview")
+            val p3 = Pair.create<View?, String?>(ivPoster, "visual")
+            val options = ActivityOptions.makeSceneTransitionAnimation(
+                context as Activity, p1, p2, p3)
             //pass in movie
-            context.startActivity(intent)
+            context.startActivity(intent, options.toBundle())
         }
     }
 

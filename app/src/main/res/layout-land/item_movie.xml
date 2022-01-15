@@ -8,6 +8,7 @@
 
     <ImageView
         android:id="@+id/ivPoster"
+        android:transitionName="visual"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
@@ -17,6 +18,7 @@
 
     <TextView
         android:id="@+id/tvTitle"
+        android:transitionName = "title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -33,6 +35,7 @@
 
     <TextView
         android:id="@+id/tvOverview"
+        android:transitionName = "overview"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
